@@ -37,7 +37,7 @@ dump_object()
 # Get our objects and variables
 vm = $evm.root['vm']
 task = $evm.root['automation_task'] || nil
-task_params = task.options[:parameters] || nil
+task_params = task.options[:parameters] rescue nil
 if vm.blank?
   $evm.log('info', "VM not found in root, looking in task params...")
   vm = $evm.vmdb(:vm).find_by_id(task_params['vm_id'])
