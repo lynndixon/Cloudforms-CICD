@@ -7,6 +7,9 @@ pipeline {
       }
     }
     stage('Refresh Dev Domain') {
+      when {
+        branch 'dev'
+      }
         steps {
             echo "Refreshing DEV Automate Domain"
             sh '''
