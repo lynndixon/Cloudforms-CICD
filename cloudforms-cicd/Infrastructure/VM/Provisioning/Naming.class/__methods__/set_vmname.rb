@@ -38,7 +38,7 @@ begin
   vm_name = nil
   vm_name = prov.get_option(:vm_target_name).to_s.strip
   # vm_prefix = $evm.object['vm_prefix']
-  vm_prefix = 'TESTING2'
+  vm_prefix = 'TESTING3'
 
   # Simple handler to generate a vmname if none is supplied by a service dialog or other means
   log(:info, "seting name to use vm_prefix: #{vm_prefix}")
