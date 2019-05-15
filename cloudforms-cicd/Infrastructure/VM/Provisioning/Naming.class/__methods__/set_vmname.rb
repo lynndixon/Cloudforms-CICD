@@ -37,7 +37,8 @@ begin
   log(:info, "prov object found is: #{prov.inspect} ")
   vm_name = nil
   vm_name = prov.get_option(:vm_target_name).to_s.strip
-  vm_prefix = "TEST7" + $evm.object['vm_prefix']
+  #vm_prefix = "TEST7" + $evm.object['vm_prefix']
+  vm_prefix = 'TESTING'
 
   # Simple handler to generate a vmname if none is supplied by a service dialog or other means
   if vm_name.blank? || vm_name == 'changeme'
