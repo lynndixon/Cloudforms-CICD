@@ -37,14 +37,12 @@ begin
   log(:info, "prov object found is: #{prov.inspect} ")
   vm_name = nil
   vm_name = prov.get_option(:vm_target_name).to_s.strip
-  #vm_prefix = "TEST7" + $evm.object['vm_prefix']
-  vm_prefix = 'TESTING1'
+  # vm_prefix = $evm.object['vm_prefix']
+  vm_prefix = 'TESTING2'
 
   # Simple handler to generate a vmname if none is supplied by a service dialog or other means
-  if vm_name.blank? || vm_name == 'changeme'
-    log(:info, "seting name to use vm_prefix: #{vm_prefix}")
-    prov.update_vm_name("#{vm_prefix}$n{3}")
-  end
+  log(:info, "seting name to use vm_prefix: #{vm_prefix}")
+  prov.update_vm_name("#{vm_prefix}$n{3}")
 
   exit MIQ_OK
 rescue => err
