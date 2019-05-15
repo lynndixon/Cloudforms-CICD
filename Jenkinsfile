@@ -27,24 +27,26 @@ pipeline {
           echo "VM Succesfully Provisioned"
           }
         }
-    stage('Refresh Production Domain') {
+    stage('Refresh Dev Domain') {
       when {
-        branch 'master'
+        branch 'dev'
       }
         steps {
-            echo "Refreshing PRODUCTION Automate Domain"
+            echo "Refreshing DEV Automate Domain"
             sh '''
-            /usr/bin/curl -k -X POST -d'{"action":"refresh_from_source"}' -u admin:smartvm "https://cfme-cicd-prod.example.com/api/automate_domains/cloudforms-cicd"
+            /usr/bin/curl -k -X POST -d'{"action":"refresh_from_source"}' -u admin:smartvm "https://cfme-cicd-dev.example.com/api/automate_domains/cloudforms-cicd"
             '''
             }
     }
     stage('Provision VM') {
       when {
-        branch 'master'
+        branch 'dev'
       }
       steps {
           echo "Provisioning Test VM"
-          echo "sh 'ruby /ruby_scripts/test.rb'"
+          sh 'ruby /ruby_scripts/test.rb'
           echo "VM Succesfully Provisioned"
+          }
+        }
     }
 }
