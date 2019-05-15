@@ -7,10 +7,10 @@ require 'base64'
 #CF_IP_ADDR = "172.16.1.50"
 CF_ADDR = ARGV[0]
 #CF_USERNAME = ARGV[1]
-#CF_PASSWORD = ARGV[2] 
+#CF_PASSWORD = ARGV[2]
 MAX_RETIRES = 20 #wait 20 minutes for the service request to complete
 CATALOG_ID = "100000000000001"
-CF_CRED = ARG[1]
+CF_CRED = ARGV[1]
 
 def call_api(url, method, content_type, accept, payload={})
   puts "calling api at #{url}"
@@ -18,7 +18,7 @@ def call_api(url, method, content_type, accept, payload={})
     :method => method,
     :url => url,
     :verify_ssl => false,
-    :headers => { 
+    :headers => {
       #:authorization  => "Basic #{Base64.strict_encode64("#{CF_USERNAME}:#{CF_PASSWORD}")}",
       :authorization  => "Basic #{Base64.strict_encode64("#{CF_CRED}")}",
       :content_type => content_type,
@@ -34,13 +34,13 @@ def call_api(url, method, content_type, accept, payload={})
       exit 1
     end
   end
-  
+
   begin
     response = RestClient::Request.new(params).execute
   rescue => error
     exit 1
-  end    
-  
+  end
+
   if accept == :json
     response_hash_array = JSON.parse(response)
     return response_hash_array
@@ -62,7 +62,7 @@ def initiate_service_provision(base_url, catalog_id)
 
   response = call_api(url, :post, :json, :json, payload)
   puts "#{response.inspect}"
-  
+
   service_request_id = response['id']
 
   return service_request_id
@@ -77,7 +77,7 @@ def get_request_task_url(base_url, service_request_id)
   request_task_url = response['resources'][0]['href']
 
   return request_task_url
-end  
+end
 
 def get_vm_id(request_task_url)
   url = request_task_url
@@ -101,7 +101,7 @@ end
 
 def retire_vm(base_url, vm_id)
   url = "#{base_url}" + "/vms/#{vm_id}"
-  
+
   payload = {
     :action => "retire"
   }
@@ -124,11 +124,11 @@ end
 #--- Begin main method---#
 begin
   base_url = "https://#{CF_ADDR}/api"
-  
+
   puts "calling initiate_service_provision"
   # Initiate the service provisioning process
   service_request_id = initiate_service_provision(base_url, CATALOG_ID)
-  
+
   # Wait until service request is complete
   puts "waiting for service request to complete"
   while get_service_request_info(base_url, service_request_id)['request_state'] != "finished"
@@ -143,11 +143,11 @@ begin
   else
     puts "the request completed successfully"
   end
-  
+
   puts "calling get_request_task_url"
   # We need the vm_id so that we can reference it for retirement
   request_task_url = get_request_task_url(base_url, service_request_id)
-  
+
   puts "calling get_vm_id"
   vm_id = get_vm_id(request_task_url)
   puts "#{vm_id.inspect}"
@@ -157,7 +157,7 @@ begin
 
   # Wait until retirement has completed
   puts "waiting for retirement to complete"
-  vm_retirement_state = get_vm_info(base_url, vm_id)['retirement_state'] 
+  vm_retirement_state = get_vm_info(base_url, vm_id)['retirement_state']
   while vm_retirement_state != "error" && vm_retirement_state != "retired"
     sleep(20)
     vm_retirement_state = get_vm_info(base_url, vm_id)['retirement_state']
@@ -170,7 +170,7 @@ begin
   else
     puts "retirement successful"
   end
-rescue => err 
+rescue => err
   puts "#{err.inspect}"
   exit 1
 end
