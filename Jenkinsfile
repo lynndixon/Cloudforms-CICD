@@ -1,13 +1,12 @@
 pipeline {
   agent any
   stages {
-    stage('Building DEV') {
-      expression {
+    stage('Getting Branch') {
+      steps {
+        expression {
         echo "BRANCH_NAME is ${env.BRANCH_NAME}"
         return env.BRANCH_NAME == "dev"
         }
-      steps {
-        echo "Building DEV Branch"
       }
     }
     stage('Refresh Dev Domain') {
