@@ -1,11 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-        expression {
-        echo "BRANCH_NAME is ${env.BRANCH_NAME}"
-        return env.BRANCH_NAME == "dev"
-        }
+    stage('Find Branch Name') {
       steps {
         echo "Found branch name of ${env.BRANCH_NAME}"
       }
@@ -21,7 +17,7 @@ pipeline {
     stage('Provision VM') {
       steps {
           echo "Provisioning Test VM"
-          sh 'ruby /ruby_scripts/test.rb'
+          echo "sh 'ruby /ruby_scripts/test.rb'"
           echo "Provisioning VM"
           }
         }
