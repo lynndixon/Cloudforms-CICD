@@ -3,10 +3,13 @@ pipeline {
   stages {
     stage('Find Branch Name') {
       steps {
-        echo "Found branch name of ${env.BRANCH_NAME}"
+        echo "Found branch name of: ${env.BRANCH_NAME}"
       }
     }
     stage('Refresh Dev Domain') {
+      when {
+        branch 'dev'
+      }
         steps {
             echo "Refreshing DEV Automate Domain"
             sh '''
@@ -15,10 +18,13 @@ pipeline {
             }
     }
     stage('Provision VM') {
+      when {
+        branch 'dev'
+      }
       steps {
           echo "Provisioning Test VM"
-          echo "sh 'ruby /ruby_scripts/test.rb'"
-          echo "Provisioning VM"
+          sh 'ruby /ruby_scripts/test.rb'
+          echo "VM Succesfully Provisioned"
           }
         }
     }
