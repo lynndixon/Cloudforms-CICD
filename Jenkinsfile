@@ -2,9 +2,10 @@ pipeline {
   agent any
   stages {
     stage('Building DEV') {
-      when {
-        branch 'dev'
-      }
+      expression {
+        echo "BRANCH_NAME is ${env.BRANCH_NAME}"
+        return env.BRANCH_NAME == "dev"
+        }
       steps {
         echo "Building DEV Branch"
       }
