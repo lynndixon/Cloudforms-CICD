@@ -1,18 +1,12 @@
 pipeline {
   agent any
   stages {
-    stage('Getting Branch') {
+    stage('Build') {
       steps {
-        expression {
-        echo "BRANCH_NAME is ${env.BRANCH_NAME}"
-        return env.BRANCH_NAME == "dev"
-        }
+        echo "Building"
       }
     }
     stage('Refresh Dev Domain') {
-      when {
-        branch 'dev'
-      }
         steps {
             echo "Refreshing DEV Automate Domain"
             sh '''
@@ -20,12 +14,9 @@ pipeline {
             '''
             }
     }
-    stage('Provision VM into DEV Cloudforms') {
-      when {
-        branch 'dev'
-      }
+    stage('Provision VM') {
       steps {
-          echo "Provisioning Test VM into DEV Cloudforms"
+          echo "Provisioning Test VM"
           sh 'ruby /ruby_scripts/test.rb'
           echo "Provisioning VM"
           }
