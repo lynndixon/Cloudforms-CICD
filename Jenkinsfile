@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Find Branch Name') {
       steps {
-        echo "Found branch name of ${env.BRANCH_NAME}"
+        echo "Found branch name of: ${env.BRANCH_NAME}"
       }
     }
     stage('Refresh Dev Domain') {
