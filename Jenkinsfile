@@ -23,7 +23,7 @@ pipeline {
       }
       steps {
           echo "Provisioning Test VM"
-          sh 'ruby /ruby_scripts/test.rb'
+          sh './cfme-scripts/cfme-lifecycle-test.rb'
           echo "VM Succesfully Provisioned"
           }
         }
@@ -44,7 +44,7 @@ pipeline {
       }
       steps {
           echo "Provisioning Prodcution Test VM"
-          sh 'ruby /ruby_scripts/test.rb'
+          sh './cfme-scripts/cfme-lifecycle-test.rb'
           echo "VM Succesfully Provisioned"
           }
         }
