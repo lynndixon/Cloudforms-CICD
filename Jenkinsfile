@@ -1,12 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('Building DEV') {
+      when {
+        branch 'dev'
+      }
       steps {
-        echo "Building"
+        echo "Building DEV Branch"
       }
     }
     stage('Refresh Dev Domain') {
+      when {
+        branch 'dev'
+      }
         steps {
             echo "Refreshing DEV Automate Domain"
             sh '''
@@ -14,9 +20,12 @@ pipeline {
             '''
             }
     }
-    stage('Provision VM') {
+    stage('Provision VM into DEV Cloudforms') {
+      when {
+        branch 'dev'
+      }
       steps {
-          echo "Provisioning Test VM"
+          echo "Provisioning Test VM into DEV Cloudforms"
           sh 'ruby /ruby_scripts/test.rb'
           echo "Provisioning VM"
           }
