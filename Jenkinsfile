@@ -18,10 +18,13 @@ pipeline {
             }
     }
     stage('Provision VM') {
+      when {
+        branch 'dev'
+      }
       steps {
           echo "Provisioning Test VM"
-          echo "sh 'ruby /ruby_scripts/test.rb'"
-          echo "Provisioning VM"
+          sh 'ruby /ruby_scripts/test.rb'
+          echo "VM Succesfully Provisioned"
           }
         }
     }
