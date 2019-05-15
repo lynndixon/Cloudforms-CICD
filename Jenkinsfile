@@ -3,7 +3,10 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo "Building"
+        expression {
+        echo "BRANCH_NAME is ${env.BRANCH_NAME}"
+        return env.BRANCH_NAME == "dev"
+        }
       }
     }
     stage('Refresh Dev Domain') {
