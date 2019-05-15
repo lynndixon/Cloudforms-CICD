@@ -23,7 +23,7 @@ pipeline {
       }
       steps {
           echo "Provisioning Test VM"
-          sh './cfme-scripts/cfme-lifecycle-test.rb cfme-cicd-dev.example.com admin:smartvm'
+          sh './cfme-scripts/cfme-lifecycle-test.rb cfme-cicd-dev.example.com "admin:smartvm"'
           echo "VM Succesfully Provisioned"
           }
         }
@@ -44,7 +44,7 @@ pipeline {
       }
       steps {
           echo "Provisioning Prodcution Test VM"
-          sh './cfme-scripts/cfme-lifecycle-test.rb cfme-cicd-prod.example.com admin:smartvm'
+          sh './cfme-scripts/cfme-lifecycle-test.rb cfme-cicd-prod.example.com "admin:smartvm"'
           echo "VM Succesfully Provisioned"
           }
         }
