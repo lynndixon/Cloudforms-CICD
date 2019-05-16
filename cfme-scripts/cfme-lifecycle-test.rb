@@ -4,13 +4,10 @@ require 'rest-client'
 require 'json'
 require 'base64'
 
-#CF_IP_ADDR = "172.16.1.50"
 CF_ADDR = ARGV[0]
-#CF_USERNAME = ARGV[1]
-#CF_PASSWORD = ARGV[2]
+CF_CRED = ARGV[1] # username:password
+CATALOG_ID = ARGV[2]
 MAX_RETIRES = 20 #wait 20 minutes for the service request to complete
-CATALOG_ID = "100000000000001"
-CF_CRED = ARGV[1]
 
 def call_api(url, method, content_type, accept, payload={})
   puts "calling api at #{url}"
@@ -19,7 +16,6 @@ def call_api(url, method, content_type, accept, payload={})
     :url => url,
     :verify_ssl => false,
     :headers => {
-      #:authorization  => "Basic #{Base64.strict_encode64("#{CF_USERNAME}:#{CF_PASSWORD}")}",
       :authorization  => "Basic #{Base64.strict_encode64("#{CF_CRED}")}",
       :content_type => content_type,
       :accept => accept
