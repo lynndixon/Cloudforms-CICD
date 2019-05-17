@@ -32,7 +32,7 @@ begin
     $evm.log(:info, "prov object inspect is: #{prov.inspect}")
   end
 
-  exit MIQ_ABORT
+
 
   # collect the vm_name variable from our provisioning object
 
