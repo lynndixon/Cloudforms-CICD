@@ -17,14 +17,14 @@ pipeline {
             '''
             }
     }
-    stage('Provision VM') {
+    stage('Testing Dev VM Lifecycle') {
       when {
         branch 'dev'
       }
       steps {
-          echo "Provisioning Test VM"
+          echo "Testing VM Lifecycle"
           sh './cfme-scripts/cfme-lifecycle-test.rb cfme-cicd-dev.example.com "admin:smartvm" "100000000000001"'
-          echo "VM Succesfully Provisioned"
+          echo "Lifecycle Testing Complete"
           }
         }
     stage('Refresh Production Domain') {
@@ -38,14 +38,14 @@ pipeline {
             '''
             }
     }
-    stage('Provision Production VM') {
+    stage('Testing Prod VM Lifecycle') {
       when {
         branch 'master'
       }
       steps {
-          echo "Provisioning Prodcution Test VM"
+          echo "Testing VM Lifecycle"
           sh './cfme-scripts/cfme-lifecycle-test.rb cfme-cicd-prod.example.com "admin:smartvm" "101000000000001"'
-          echo "VM Succesfully Provisioned"
+          echo "Lifecycle Testing Complete"
           }
         }
     }
