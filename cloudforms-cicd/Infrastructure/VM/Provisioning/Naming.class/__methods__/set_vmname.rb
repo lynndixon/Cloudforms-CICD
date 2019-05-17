@@ -34,7 +34,6 @@ begin
 
   # collect the vm_name variable from our provisioning object
 
-  exit MIQ_ABORT
 
   log(:info, "prov object found is: #{prov.inspect} ")
   vm_name = nil
