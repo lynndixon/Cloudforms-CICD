@@ -34,6 +34,7 @@ begin
 
   # collect the vm_name variable from our provisioning object
 
+
   log(:info, "prov object found is: #{prov.inspect} ")
   vm_name = nil
   vm_name = prov.get_option(:vm_target_name).to_s.strip
