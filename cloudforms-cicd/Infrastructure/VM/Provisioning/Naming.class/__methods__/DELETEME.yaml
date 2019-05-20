@@ -3,7 +3,7 @@ object_type: method
 version: 1.0
 object:
   attributes:
-    name: DELETE_ME
+    name: DELETEME
     display_name: 
     description: 
     scope: instance
