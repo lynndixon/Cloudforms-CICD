@@ -7,3 +7,6 @@ object:
     name: DELETEME
     inherits: 
     description: 
+  fields:
+  - meth1:
+      value: DELETEME
