@@ -1,0 +1,15 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: AnsibleDemo
+    inherits: 
+    description: 
+  fields:
+  - get_environment:
+      value: "/Variables_Domain/Environment/Ansible/Environment"
+      collect: environment = environment
+  - job_template_name:
+      value: CICD_Demo_${#environment}
