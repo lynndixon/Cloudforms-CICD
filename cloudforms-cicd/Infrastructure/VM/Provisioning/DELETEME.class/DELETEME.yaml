@@ -22,12 +22,12 @@ object:
       substitute: true
       message: create
       visibility: 
-      collect: ''
+      collect: 
       scope: 
       description: 
       condition: 
       on_entry: update_provision_status(status=>'hi')
-      on_exit: ''
-      on_error: ''
+      on_exit: 
+      on_error: 
       max_retries: '100'
       max_time: 
