@@ -5,7 +5,7 @@ object:
   attributes:
     description: 
     display_name: 
-    name: Naming
+    name: DELETEME
     type: 
     inherits: 
     visibility: 
@@ -18,7 +18,7 @@ object:
       datatype: string
       priority: 1
       owner: 
-      default_value: "/Some/Fake/Instance"
+      default_value: "/some/path"
       substitute: true
       message: create
       visibility: 
@@ -26,7 +26,7 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: update_provision_status(status => 'running state')
+      on_entry: update_provision_status(status=>'hi')
       on_exit: ''
       on_error: ''
       max_retries: '100'
