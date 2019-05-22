@@ -5,7 +5,7 @@ object:
   attributes:
     description: VM Naming Profiles
     display_name: 
-    name: MyClass
+    name: DELETEME
     type: 
     inherits: 
     visibility: 
