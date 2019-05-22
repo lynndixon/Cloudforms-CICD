@@ -5,7 +5,7 @@ object:
   attributes:
     description: 
     display_name: 
-    name: MyCoolClass
+    name: MyCoolerClass
     type: 
     inherits: 
     visibility: 
