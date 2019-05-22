@@ -6,12 +6,23 @@ pipeline {
         echo "Found branch name of: ${env.BRANCH_NAME}"
       }
     }
-    stage('Refresh Dev Domain') {
+    stage('Refresh Tower DEV Project') {
       when {
         branch 'dev'
       }
         steps {
-            echo "Refreshing DEV Automate Domain"
+            echo "Refreshing Tower DEV Project"
+            sh '''
+            /usr/bin/curl -X POST -u 'admin:r3dh4t!' 'https://tower.example.com/api/v2/projects/6/update/' -k
+            '''
+            }
+    }
+    stage('Refresh Dev Cloudforms Domain') {
+      when {
+        branch 'dev'
+      }
+        steps {
+            echo "Refreshing DEV Cloudforms Automate Domain"
             sh '''
             /usr/bin/curl -k -X POST -d'{"action":"refresh_from_source"}' -u admin:smartvm "https://cfme-cicd-dev.example.com/api/automate_domains/cloudforms-cicd"
             '''
@@ -27,12 +38,23 @@ pipeline {
           echo "Lifecycle Testing Complete"
           }
         }
-    stage('Refresh Production Domain') {
+    stage('Refresh Production Tower Project') {
       when {
         branch 'master'
       }
         steps {
-            echo "Refreshing Production Automate Domain"
+            echo "Refreshing Production Tower Project"
+            sh '''
+            /usr/bin/curl -X POST -u 'admin:r3dh4t!' 'https://tower.example.com/api/v2/projects/9/update/' -k
+            '''
+            }
+    }
+    stage('Refresh Production Cloudforms Domain') {
+      when {
+        branch 'master'
+      }
+        steps {
+            echo "Refreshing Production Cloudforms Automate Domain"
             sh '''
             /usr/bin/curl -k -X POST -d'{"action":"refresh_from_source"}' -u admin:smartvm "https://cfme-cicd-prod.example.com/api/automate_domains/cloudforms-cicd"
             '''
